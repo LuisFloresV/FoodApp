@@ -25,7 +25,22 @@ SECRET_KEY = 'skgdrohvz$inx9rw+p6@k17+e&=$uh0%z8fnp*1dope%+rj!40'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ENVIRONMENT = 'development'
+
+if ENVIRONMENT == 'production': 
+    SECURE_BROWSER_XSS_FILTER = True # new
+    X_FRAME_OPTIONS = 'DENY' # new
+    SECURE_SSL_REDIRECT = True 
+    SECURE_HSTS_SECONDS = 3600 # new 
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True # new 
+    SECURE_HSTS_PRELOAD = True # new 
+    SECURE_CONTENT_TYPE_NOSNIFF = True # new
+    SESSION_COOKIE_SECURE = True # new 
+    CSRF_COOKIE_SECURE = True # new
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    DEBUG = False
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -121,3 +136,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SITE_ID = 1
